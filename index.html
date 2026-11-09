@@ -1034,14 +1034,45 @@
     setHTML('#origin .copy', '<span class="eyebrow" data-rv="">Nossa essência</span><h2 class="serif" data-rv="">Inspirados pela <em>natureza,</em><br>feitos com propósito.</h2><p data-rv="">Tudo começa com uma escolha consciente.</p><p data-rv="">Valorizamos os ingredientes, a simplicidade e o cuidado em cada etapa da produção artesanal. Porque aquilo que escolhemos consumir também reflete a maneira como queremos viver.</p><div class="meta" data-rv=""><div><div class="k serif">01</div><div class="l">naturalidade</div></div><div><div class="k serif">02</div><div class="l">artesanalidade</div></div><div><div class="k serif">03</div><div class="l">consciência</div></div></div>');
     setHTML('#craft .copy', '<span class="eyebrow" data-rv="">Nosso processo</span><h2 class="serif" data-rv="">Feitos à mão.<br><em>Com tempo e cuidado.</em></h2><p data-rv="">Cada sabonete nasce de um processo artesanal, no qual a atenção aos detalhes faz toda a diferença.</p><p data-rv="">Da preparação à finalização, valorizamos cada etapa e a singularidade de cada criação. Porque algumas coisas merecem ser feitas sem pressa.</p><div class="microsteps" data-rv=""><div><div class="n jp">01</div><div class="t">cuidado em cada etapa</div></div><div><div class="n jp">02</div><div class="t">produção artesanal</div></div><div><div class="n jp">03</div><div class="t">feito com propósito</div></div></div>');
     setHTML('#ritual .head', '<span class="eyebrow">O prazer do essencial</span><h2 class="serif">Pequenos gestos. Grandes sensações.</h2>');
+    var mediaPhotos = [
+      'WhatsApp Image 2026-10-15 at 21.22.31 (1).jpeg',
+      'WhatsApp Image 2026-10-15 at 21.22.31 (2).jpeg',
+      'WhatsApp Image 2026-10-15 at 21.22.31 (3).jpeg',
+      'WhatsApp Image 2026-10-15 at 21.22.31.jpeg',
+      'WhatsApp Image 2026-10-15 at 21.22.32 (1).jpeg',
+      'WhatsApp Image 2026-10-15 at 21.22.32 (2).jpeg',
+      'WhatsApp Image 2026-10-15 at 21.22.32.jpeg',
+      'WhatsApp Image 2026-11-05 at 12.50.31 (1).jpeg',
+      'WhatsApp Image 2026-11-05 at 12.50.31.jpeg',
+      'WhatsApp Image 2026-11-05 at 12.50.32 (1).jpeg',
+      'WhatsApp Image 2026-11-05 at 12.50.32 (2).jpeg',
+      'WhatsApp Image 2026-11-05 at 12.50.32.jpeg'
+    ];
+    var ritualTrack = doc.querySelector('#ritual .track');
+    var ritualSteps = ritualTrack ? ritualTrack.querySelectorAll('.step:not(.intro)') : [];
+    mediaPhotos.forEach(function (photo, i) {
+      var src = new URL('media/' + photo, W.location.href).href;
+      var step = ritualSteps[i];
+      if (!step) {
+        step = doc.createElement('div');
+        step.className = 'step photo-only';
+        step.innerHTML = '<img alt="Foto da MUDA" loading="lazy"><div class="lab"></div>';
+        if (ritualTrack) ritualTrack.appendChild(step);
+      }
+      var image = step.querySelector('img');
+      if (image) { image.src = src; image.alt = 'Foto da MUDA'; }
+    });
+    var ritualStyle = doc.createElement('style');
+    ritualStyle.textContent = '#ritual .step.photo-only .lab{display:none}#ritual .step.photo-only img{height:100%;min-height:420px;object-fit:cover}';
+    doc.head.appendChild(ritualStyle);
     setHTML('.step.intro .big', 'O cuidado não precisa ser complicado.<br><em>Precisa ser sentido.</em>');
-    var ritualSteps = [
+    var ritualCopy = [
       ['01 · A escolha', 'A escolha', 'Tudo começa com a intenção de cuidar melhor de si.'],
       ['02 · O contato', 'O contato', 'Texturas e aromas que despertam os sentidos.'],
       ['03 · A pausa', 'A pausa', 'Um instante de tranquilidade em meio à rotina.'],
       ['04 · O recomeço', 'O recomeço', 'A simplicidade de se sentir bem, todos os dias.']
     ];
-    doc.querySelectorAll('.step:not(.intro)').forEach(function (step, i) { var lab = step.querySelector('.lab'); if (lab && ritualSteps[i]) lab.innerHTML = '<span class="s jp">' + ritualSteps[i][0] + '</span><h3 class="serif">' + ritualSteps[i][1] + '</h3><p>' + ritualSteps[i][2] + '</p>'; });
+    doc.querySelectorAll('.step:not(.intro)').forEach(function (step, i) { var lab = step.querySelector('.lab'); if (lab && ritualCopy[i]) lab.innerHTML = '<span class="s jp">' + ritualCopy[i][0] + '</span><h3 class="serif">' + ritualCopy[i][1] + '</h3><p>' + ritualCopy[i][2] + '</p>'; });
     setHTML('#shop .head', '<span class="eyebrow c" data-rv="">Nossas criações</span><h2 class="serif" data-rv="">Da natureza, para você.</h2>');
     var products = ['Uma experiência de cuidado inspirada na natureza.', 'O encanto dos ingredientes em uma criação artesanal.', 'Simplicidade e cuidado em cada detalhe.'];
     doc.querySelectorAll('.grade').forEach(function (grade, i) { var body = grade.querySelector('.body'); if (body) body.innerHTML = '<span class="g">Produto 0' + (i + 1) + '</span><h3 class="serif">[Nome real do sabonete]</h3><p>' + products[i] + '</p><div class="row"><span class="price"></span><span class="add">CONHECER ↗</span></div>'; });
